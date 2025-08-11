@@ -1,8 +1,11 @@
 use actix_web::{get, web, App, HttpServer, Responder};
 
+mod utils;
+mod routes;
+
 #[get("/hello/{name}")]
 async fn greet(name: web::Path<String>) -> impl Responder {
-    format!("hello {}!", name)
+    format!("hello {}", name)
 }
 
 #[tokio::main]
