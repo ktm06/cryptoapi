@@ -1,24 +1,24 @@
-use actix_web::{get, web, App, HttpServer, Responder};
+use actix_web::{App, HttpServer};
+use actix_web::middleware::Logger;
 
 mod utils;
 mod routes;
 
-#[get("/hello/{name}")]
-async fn greet(name: web::Path<String>) -> impl Responder {
-    format!("hello {}", name)
-}
+
 
 #[tokio::main]
 async fn main() -> std::io::Result<()> {
     env_logger::init();
+    let address: String = utils::constants::ADDRESS.clone();
+    let port: u16 = utils::constants::PORT.clone();
     dotenv::dotenv().ok();
-
-    HttpServer::new( || {
+    println!("Server running at http://{}:{}", address, port);
+    HttpServer::new(|| {
         App::new()
-            .service(greet)
+            .wrap(Logger::default())
+            .configure(routes::home_routes::config)
     })
-    .bind(("127.0.0.1", 8080))?
+    .bind((address, port))?
     .run()
     .await
 }
-
