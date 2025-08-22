@@ -176,7 +176,7 @@ async fn find_stats() -> impl Responder {
     let stats: std::collections::HashMap<String, u64> = get_stats();
     HttpResponse::Ok().json(stats)
 }
-
+//test commit
 #[post("/register")]
 async fn register(
     pool: web::Data<PgPool>, 
@@ -212,3 +212,4 @@ async fn register(
         }
     }
 }
+
