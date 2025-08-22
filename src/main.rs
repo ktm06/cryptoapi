@@ -1,8 +1,8 @@
 use actix_web::{App, HttpServer};
 use actix_web::middleware::Logger;
 
-mod utils;
-mod routes;
+pub mod utils;
+pub mod routes;
 
 
 
