@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 use actix_web::{get, post, web, HttpResponse, Responder};
 use serde::{Serialize, Deserialize};
 
@@ -22,12 +23,18 @@ pub fn get_stats() -> HashMap<String, u64> {
     stats.clone()
 }
 
+=======
+use actix_web::{get, web, HttpResponse, Responder};
+use serde::{Serialize, Deserialize};
+
+>>>>>>> 815da385e2c8327b9a34c7ab304ecc33e84ee1e0
 #[derive(Serialize)]
 struct ErrorResponse {
     error: String,
 }
 
 #[derive(Deserialize)]
+<<<<<<< HEAD
 pub struct CoinParams {
     pub coin: String,
 }
@@ -50,6 +57,12 @@ pub struct RegisterParams {
     pub email: String,
     pub password: String,
 }
+=======
+pub struct Params {
+    pub coin: String,
+}
+
+>>>>>>> 815da385e2c8327b9a34c7ab304ecc33e84ee1e0
 
 #[get("/hello/{name}")]
 async fn greet(name: web::Path<String>) -> impl Responder {
@@ -59,8 +72,12 @@ async fn greet(name: web::Path<String>) -> impl Responder {
 
 
 #[get("/fetch")]
+<<<<<<< HEAD
 async fn fetch_price(query: web::Query<CoinParams>) -> impl Responder {
     increment("fetch");
+=======
+async fn fetch_price(query: web::Query<Params>) -> impl Responder {
+>>>>>>> 815da385e2c8327b9a34c7ab304ecc33e84ee1e0
     let url = format!("https://api.coingecko.com/api/v3/simple/price?ids={}&vs_currencies=usd", query.coin);
     match reqwest::get(&url).await {
         Ok(resp) => {
@@ -85,7 +102,10 @@ async fn fetch_price(query: web::Query<CoinParams>) -> impl Responder {
 
 #[get("/coins")]
 async fn list() -> impl Responder {
+<<<<<<< HEAD
     increment("coins");
+=======
+>>>>>>> 815da385e2c8327b9a34c7ab304ecc33e84ee1e0
     let url = "https://api.coingecko.com/api/v3/coins/list";
     match reqwest::get(url).await {
         Ok(resp) => {
@@ -100,6 +120,7 @@ async fn list() -> impl Responder {
             error: "Failed to fetch data".to_string(),
         }),
     }
+<<<<<<< HEAD
 }
 
 #[get("/fetchwithdate")]
@@ -213,3 +234,6 @@ async fn register(
     }
 }
 
+=======
+}
+>>>>>>> 815da385e2c8327b9a34c7ab304ecc33e84ee1e0
